@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model IEnumerable<Mission08_Team0309.Models.UserTask>
+
+@{
+    ViewData["Title"] = "Database Test";
+}
+
+<h1>Database Connectivity Test</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Task Name</th>
+            <th>Quadrant</th>
+            <th>Category</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var task in Model)
+        {
+            <tr>
+                <td>@task.TaskName</td>
+                <td>@task.Quadrant</td>
+                <td>@(task.Category?.CategoryName ?? "No Category")</td>
+                <td>@(task.Completed ? "Done" : "Pending")</td>
+            </tr>
+        }
+    </tbody>
+</table>
