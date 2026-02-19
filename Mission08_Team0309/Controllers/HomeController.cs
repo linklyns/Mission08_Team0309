@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Mission08_Team0309.Models;
-using System.Diagnostics;
 
 namespace Mission08_Team0309.Controllers
 {
@@ -16,58 +15,50 @@ namespace Mission08_Team0309.Controllers
 
         public IActionResult Index()
         {
-            var tasks = _repo.Tasks.ToList();
-            return View(tasks);
+            return View();
         }
 
-        // GET: Display all tasks in quadrant layout
+        // GET: Display all tasks in quadrant layout (Home page)
         public IActionResult Quadrants()
         {
             var tasks = _repo.Tasks.Where(t => !t.Completed).ToList();
             return View(tasks);
         }
 
-        // GET: Show the Add Task form
+        // GET: Show the Add/Edit Task form
         [HttpGet]
-        public IActionResult AddTask()
+        public IActionResult AddTask(int? id)
         {
             ViewBag.Categories = new SelectList(_repo.Categories.ToList(), "CategoryId", "CategoryName");
-            return View();
+
+            if (id.HasValue)
+            {
+                var task = _repo.Tasks.FirstOrDefault(t => t.TaskId == id.Value);
+                if (task == null)
+                {
+                    return NotFound();
+                }
+                ViewBag.Categories = new SelectList(_repo.Categories.ToList(), "CategoryId", "CategoryName", task.CategoryId);
+                return View(task);
+            }
+
+            return View(new UserTask());
         }
 
-        // POST: Save a new task
+        // POST: Save a new or edited task
         [HttpPost]
         public IActionResult AddTask(UserTask task)
         {
             if (ModelState.IsValid)
             {
-                _repo.AddTask(task);
-                return RedirectToAction("Quadrants");
-            }
-            ViewBag.Categories = new SelectList(_repo.Categories.ToList(), "CategoryId", "CategoryName");
-            return View(task);
-        }
-
-        // GET: Show the Edit Task form
-        [HttpGet]
-        public IActionResult Edit(int id)
-        {
-            var task = _repo.Tasks.FirstOrDefault(t => t.TaskId == id);
-            if (task == null)
-            {
-                return NotFound();
-            }
-            ViewBag.Categories = new SelectList(_repo.Categories.ToList(), "CategoryId", "CategoryName", task.CategoryId);
-            return View(task);
-        }
-
-        // POST: Save edited task
-        [HttpPost]
-        public IActionResult Edit(UserTask task)
-        {
-            if (ModelState.IsValid)
-            {
-                _repo.UpdateTask(task);
+                if (task.TaskId == 0)
+                {
+                    _repo.AddTask(task);
+                }
+                else
+                {
+                    _repo.UpdateTask(task);
+                }
                 return RedirectToAction("Quadrants");
             }
             ViewBag.Categories = new SelectList(_repo.Categories.ToList(), "CategoryId", "CategoryName", task.CategoryId);

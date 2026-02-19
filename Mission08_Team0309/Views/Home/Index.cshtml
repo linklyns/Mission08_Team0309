@@ -1,33 +1,15 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-@model IEnumerable<Mission08_Team0309.Models.UserTask>
-
 @{
-    ViewData["Title"] = "Database Test";
+    ViewData["Title"] = "Home";
 }
 
-<h1>Database Connectivity Test</h1>
-
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Task Name</th>
-            <th>Quadrant</th>
-            <th>Category</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var task in Model)
-        {
-            <tr>
-                <td>@task.TaskName</td>
-                <td>@task.Quadrant</td>
-                <td>@(task.Category?.CategoryName ?? "No Category")</td>
-                <td>@(task.Completed ? "Done" : "Pending")</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="text-center mt-5">
+    <h1>Task Manager</h1>
+    <p class="lead mt-3">
+        Organize your tasks using the Eisenhower Matrix — prioritize by importance and urgency
+        to focus on what matters most.
+    </p>
+    <div class="mt-4">
+        <a asp-controller="Home" asp-action="Quadrants" class="btn btn-primary btn-lg me-2">View Quadrants</a>
+        <a asp-controller="Home" asp-action="AddTask" class="btn btn-outline-primary btn-lg">Add a Task</a>
+    </div>
+</div>
