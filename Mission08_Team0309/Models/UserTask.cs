@@ -10,8 +10,10 @@ namespace Mission08_Team0309.Models
         public int TaskId { get; set; }
 
         [Required]
+        [Display(Name = "Task Name")]
         public string TaskName { get; set; }
 
+        [Display(Name = "Due Date")]
         public DateTime? DueDate { get; set; }
 
         [Required]

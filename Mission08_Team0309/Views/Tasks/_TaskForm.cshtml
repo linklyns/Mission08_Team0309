@@ -1,0 +1,50 @@
+﻿@model Mission08_Team0309.Models.ViewModels.TaskFormViewModel
+
+<div class="row">
+    <div class="col-md-8 col-lg-6">
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Task.TaskName"></label>
+            <input class="form-control" asp-for="Task.TaskName" />
+            <span class="text-danger" asp-validation-for="Task.TaskName"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Task.DueDate"></label>
+            <input class="form-control" asp-for="Task.DueDate" type="date" />
+            <span class="text-danger" asp-validation-for="Task.DueDate"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Task.Quadrant">Quadrant</label>
+            <select class="form-select" asp-for="Task.Quadrant">
+                <option value="">-- Select --</option>
+                <option value="1">Quadrant I (Important / Urgent)</option>
+                <option value="2">Quadrant II (Important / Not Urgent)</option>
+                <option value="3">Quadrant III (Not Important / Urgent)</option>
+                <option value="4">Quadrant IV (Not Important / Not Urgent)</option>
+            </select>
+            <span class="text-danger" asp-validation-for="Task.Quadrant"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Task.CategoryId">Category</label>
+            <select class="form-select" asp-for="Task.CategoryId">
+                <option value="">-- Select --</option>
+                @foreach (var c in Model.Categories)
+                {
+                    <option value="@c.CategoryId">@c.CategoryName</option>
+                }
+            </select>
+            <span class="text-danger" asp-validation-for="Task.CategoryId"></span>
+        </div>
+
+        <div class="form-check mb-3">
+            <input class="form-check-input" asp-for="Task.Completed" />
+            <label class="form-check-label" asp-for="Task.Completed"></label>
+        </div>
+
+        <input type="hidden" asp-for="Task.TaskId" />
+
+    </div>
+</div>
