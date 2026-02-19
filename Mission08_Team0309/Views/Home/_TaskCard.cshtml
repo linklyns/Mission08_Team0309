@@ -14,7 +14,7 @@
             }
         </div>
         <div class="btn-group-vertical btn-group-sm">
-            <a asp-action="Edit" asp-route-id="@Model.TaskId" class="btn btn-outline-primary btn-sm" title="Edit">Edit</a>
+            <a asp-action="AddTask" asp-route-id="@Model.TaskId" class="btn btn-outline-primary btn-sm" title="Edit">Edit</a>
             <form asp-action="MarkComplete" asp-route-id="@Model.TaskId" method="post" style="display:inline;">
                 <button type="submit" class="btn btn-outline-success btn-sm w-100" title="Mark Complete">Done</button>
             </form>
