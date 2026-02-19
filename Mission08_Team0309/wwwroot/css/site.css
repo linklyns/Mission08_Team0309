@@ -29,3 +29,36 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+/* Quadrant Styling */
+.quadrant-card {
+  min-height: 300px;
+}
+
+.quadrant-1 .card-header {
+  background-color: #dc3545;
+  color: white;
+}
+
+.quadrant-2 .card-header {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.quadrant-3 .card-header {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.quadrant-4 .card-header {
+  background-color: #6c757d;
+  color: white;
+}
+
+.task-card {
+  transition: box-shadow 0.2s;
+}
+
+.task-card:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
