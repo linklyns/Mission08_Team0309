@@ -1,0 +1,16 @@
+﻿@model Mission08_Team0309.Models.ViewModels.TaskFormViewModel
+
+@{
+    ViewData["Title"] = "Add Task";
+}
+
+<h1 class="mb-3">Add Task</h1>
+
+<form method="post" asp-controller="Tasks" asp-action="Create">
+
+    <partial name="_TaskForm" model="Model" />
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a class="btn btn-outline-secondary ms-2" asp-controller="Tasks" asp-action="Quadrants">Cancel</a>
+
+</form>
